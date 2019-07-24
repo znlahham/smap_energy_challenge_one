@@ -1,0 +1,7 @@
+12:18:55.698535;24/07/2019;ERROR;Missing Input! Data path or consumption folder
+12:21:32.902040;24/07/2019;DEBUG;deleting database tables
+12:21:33.178292;24/07/2019;DEBUG;get UsersData csv file information 
+12:21:33.180322;24/07/2019;DEBUG;getting 15 of users
+12:21:33.183314;24/07/2019;DEBUG;getting 30 of consumption per user
+12:21:36.706908;24/07/2019;DEBUG;DONE!
+12:24:01.781194;24/07/2019;DEBUG;DONE!

@@ -1,0 +1,86 @@
+{% extends 'consumption/layout.html' %}
+
+{% block content %}
+
+<html>
+<body>
+
+<article>
+  <header>
+    <h1>All Users Data</h1>
+</article>
+
+</body>
+</html>
+
+
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<table style="width:100%">
+  <tr>
+    <th>User ID</th>
+    <th>User Area</th> 
+    <th>User Tariff</th>
+	<th>Consumption Average (W)</th>
+	<th>Consumption Total (W)</th>
+	<th></th>
+  </tr>
+  
+  
+  {% for o in users_data %}
+    <tr>
+		<td>{{o.user_id}}</td>
+		<td>{{o.user_area}}</td>
+		<td>{{o.user_tariff}}</td>
+		<td>{{o.user_consump_avg}}</td>
+		<td>{{o.user_consump_total}}</td>
+		<td><a class="details_button" href="/detail?user_id={{o.user_id}}">View Details</a></td>
+    </tr>
+   {% endfor %}
+
+</table>
+
+<br></br>
+<br></br>
+
+
+
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+       google.charts.load('current', {packages:['corechart']});
+      google.charts.setOnLoadCallback(drawStuff);
+        function drawStuff() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Date'),
+          data.addColumn('number', 'Total Consumption');
+		  data.addRows({{users_comsump|safe}});
+
+         var options = {
+           title: 'Total consumption for all users in 2016',
+           legend: 'none',
+           bar: {groupWidth: '95%'},
+           vAxis: { gridlines: { count: 4 } }
+         };
+      var linearChart = new google.visualization.LineChart(document.getElementById('linear_div'));
+       linearChart.draw(data, options);
+    }
+    </script>
+    <div id="linear_div" style="width: 1500px; height: 500px"></div>
+
+{% endblock %}
